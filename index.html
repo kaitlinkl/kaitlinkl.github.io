@@ -4,30 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaitlin's Semantic Portfolio</title>
+    <link rel="stylesheet" href="https://use.typekit.net/fgp0nob.css">
+    <style>
+        html {
+            font-family: omnium, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .flex {
+            display: flex;
+            flex-direction: row;
+        }
+        .color-box {
+            width: 800px;
+            height: 20px;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            
+            text-align: center;
+        }
+        #box1 { 
+            background-color: #7EA8BE;
+         }
+        #box2 { 
+            background-color: #779CAB;
+         }
+        #box3 { 
+            background-color: #7EA8BE;
+         }
+        a {
+            text-decoration: none;
+            color: #1C2541;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #3A506B;
+        }
+        h1 {
+            font-size: 50px;
+            text-align: center;
+        }
+        .under-header {
+            font-size: 20px;
+            color: #9B97B2;
+            text-align: center;
+        }
+        h2 {
+            font-size: 35px;
+        }
+    </style>
 </head>
 <body>
     <header>
-    <h1>Welcome to Kaitlin's Semantic Portfolio</h1>
-    <p>This is the home page of my semantic portfolio. Here you can find links to various projects and information about me.</p>
+    <h1>Welcome to Kaitlin's Semantic Portfolio!</h1>
+    <p class="under-header">This is the home page of my semantic portfolio. Here you can find links to various projects and information about me.</p>
     <nav>
-        <ul>
-            <li><a href="about.html">About Me</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+            <div class="flex">
+            <div class="color-box" id="box1">
+                <a href="about.html">About Me</a>
+            </div>
+            <div class="color-box" id="box2">
+                <a href="projects.html">Projects</a>
+            </div>
+            <div class="color-box" id="box3">
+                <a href="contact.html">Contact</a>
+            </div>
+            </div>
     </nav>
     <header>
         <main>
         <section>
-            <h2>Featured Projects</h2>
+            <h2>Featured Projects:</h2>
             <article>
                 <h3>Project One</h3>
-                <p><img src="images/refined300x400.png"></p>
+                <img src="images/refined300x400.png" alt="Person in a blue jacket holding a microphone and guitar, standing in front of a large red brain illustration. The guitar strap reads BRAIN MUSIC LAB in bold white letters. The overall tone is energetic and creative." />
                 <p>This is currently still in the works, but I am remaking this drawing in illustrator for my text class.</p>
             </article>
             <article>
                 <h3>Project Two</h3>
-                <p><img src="images/vanity butcher ryoshu.gif"></p>
+                <img src="images/vanity butcher ryoshu.gif">
                 <p>This is a brief animation that I am still working on as of right now. (started: 09.03.25)</p>
             </article>
         </section>
