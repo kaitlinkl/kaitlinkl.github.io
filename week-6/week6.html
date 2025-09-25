@@ -62,8 +62,24 @@
         <div class="box" id="five"></div>
         <div class="box" id="six"></div>
     </div>
+
+    <div class="demo-container">
+        <button id="demo-btn">Click Me!</button>
+        <input type="text" id="demo-input" placeholder="Type something...">
+        <div class ="demo-box">Hover over me</div>
+    </div>
+
+    <div id="grandparent">
+        <div id="parent">
+            <div id="child">Click me!</div>
+        </div>
+    </div>
     
     <script>
+        document.getElementById("grandparent").addEventListener("click", function() {
+            alert("Grandparent Clicked!");
+        });
+
         let box1 = document.querySelector("#one").addEventListener("click", message) ;
 
         function message() {
