@@ -105,13 +105,6 @@ function showSlides(n) {
   slides[slideindex-1].style.display = "block";  
   dots[slideindex-1].className += " active";
 
-  function showGalleryForSlide(slideIndex) {
-  document.querySelectorAll('.canto-gallery').forEach(gallery => {
-    gallery.classList.remove('active');
-  });
-  const galleryToShow = document.querySelector(`.canto${slideIndex}-gallery`);
-  if (galleryToShow) galleryToShow.classList.add('active');
-}
   // Hide all galleries
   let galleries = document.querySelectorAll('.cantoI-gallery, .cantoII-gallery, .cantoIII-gallery, .cantoIV-gallery, .cantoV-gallery, .cantoVI-gallery, .cantoVII-gallery, .cantoVIII-gallery');
   galleries.forEach(gallery => gallery.classList.remove('active'));

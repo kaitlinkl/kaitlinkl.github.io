@@ -398,6 +398,7 @@ html {
 }
 .img-modal-prev:hover, .img-modal-next:hover {
     background: rgba(0,0,0,0.8);
+    border-radius: 2px;
 }
 @keyframes zoom {
     from {transform: scale(0)} 
@@ -419,7 +420,6 @@ html {
     height: auto;
     object-fit: cover;
     border: 2px solid darkred;
-    border-radius: 8px;
     transition: opacity 0.5s ease-in-out;
 }
 .grid-img:hover {
