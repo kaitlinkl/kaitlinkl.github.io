@@ -27,6 +27,8 @@ function topFunction() {
 }
 
 // cantos page stuff 
+let modalImages = {};
+let currentModalIndex = 0;
 let slideindex = 1;
 showSlides(slideindex);
 
@@ -37,6 +39,56 @@ function plusSlides(n) {
 function currentSlide(n) {
   showSlides(slideindex = n);
 }
+
+// Enlarge image on click
+
+document.querySelectorAll('.grid-img').forEach(img => {
+  img.addEventListener('click', function() {
+    // Find the parent gallery of the clicked image
+    const activeGallery = this.closest('.cantoI-gallery.active, .cantoII-gallery.active, .cantoIII-gallery.active, .cantoIV-gallery.active, .cantoV-gallery.active, .cantoVI-gallery.active, .cantoVII-gallery.active, .cantoVIII-gallery.active');
+    if (!activeGallery) return;
+
+    // Get all images in the active gallery
+    modalImages = Array.from(activeGallery.querySelectorAll('.grid-img'));
+    currentModalIndex = modalImages.indexOf(this);
+
+    showModalImage(currentModalIndex);
+    document.getElementById('img-modal').style.display = 'flex';
+  });
+});
+
+function showModalImage(index) {
+  const modalImg = document.getElementById('img-modal-img');
+  modalImg.src = modalImages[index].src;
+}
+
+// Close modal when clicking the close button or outside the image
+document.querySelector('.img-modal-close').onclick = function() {
+  document.getElementById('img-modal').style.display = 'none';
+};
+document.getElementById('img-modal').onclick = function(e) {
+  if (e.target === this) this.style.display = 'none';
+};
+function showModalImage(index) {
+  const modalImg = document.getElementById('img-modal-img');
+  modalImg.src = modalImages[index].src;
+}
+// Previous/Next buttons
+document.querySelector('.img-modal-next').onclick = function(e) {
+  e.stopPropagation();
+  if (modalImages.length === 0) return;
+  currentModalIndex = (currentModalIndex + 1) % modalImages.length;
+  showModalImage(currentModalIndex);
+};
+
+document.querySelector('.img-modal-prev').onclick = function(e) {
+  e.stopPropagation();
+  if (modalImages.length === 0) return;
+  currentModalIndex = (currentModalIndex - 1 + modalImages.length) % modalImages.length;
+  showModalImage(currentModalIndex);
+};
+
+// Show slides and corresponding galleries
 
 function showSlides(n) {
   let i;
@@ -52,5 +104,28 @@ function showSlides(n) {
   }
   slides[slideindex-1].style.display = "block";  
   dots[slideindex-1].className += " active";
+
+  // Hide all galleries
+  let galleries = document.querySelectorAll('.cantoI-gallery, .cantoII-gallery, .cantoIII-gallery, .cantoIV-gallery, .cantoV-gallery, .cantoVI-gallery, .cantoVII-gallery, .cantoVIII-gallery');
+  galleries.forEach(gallery => gallery.classList.remove('active'));
+
+  // Show the gallery for the current slide
+  if (slideindex === 1) {
+    document.querySelector('.cantoI-gallery').classList.add('active');
+  } else if (slideindex === 2) {
+    document.querySelector('.cantoII-gallery').classList.add('active');
+  } else if (slideindex === 3) {
+    document.querySelector('.cantoIII-gallery').classList.add('active');
+  } else if (slideindex === 4) {
+    document.querySelector('.cantoIV-gallery').classList.add('active');
+  } else if (slideindex === 5) {
+    document.querySelector('.cantoV-gallery').classList.add('active');
+  } else if (slideindex === 6) {
+    document.querySelector('.cantoVI-gallery').classList.add('active');
+  } else if (slideindex === 7) {
+    document.querySelector('.cantoVII-gallery').classList.add('active');
+  } else if (slideindex === 8) {
+    document.querySelector('.cantoVIII-gallery').classList.add('active');
+  }
 }
 // end of cantos page stuff

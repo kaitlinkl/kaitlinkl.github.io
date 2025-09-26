@@ -78,8 +78,8 @@ html {
   right: 0;
   top: 0;
   font-size: 2rem;
-  width: 50px;
-  height: 57.8px;
+  width: 75px;
+  height: 86.7px;
   line-height: 55px;
   text-align: center;
   cursor: pointer;
@@ -146,14 +146,14 @@ html {
   bottom: 20px;
   right: 30px;
   z-index: 99;
-  font-size: 18px;
+  font-size: 20px;
   border: none;
   outline: none;
-  background-color: red;
-  color: white;
+  background-color: darkred;
+  color: #fed322;
   cursor: pointer;
   padding: 15px;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 #myBtn:hover {
@@ -330,6 +330,115 @@ html {
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
+
+* {
+    box-sizing: border-box;
+}
+.cantoI-gallery,
+.cantoII-gallery,
+.cantoIII-gallery,
+.cantoIV-gallery,
+.cantoV-gallery,
+.cantoVI-gallery,
+.cantoVII-gallery,
+.cantoVIII-gallery {
+    display: none;
+    background: transparent;
+}
+.cantoI-gallery.active,
+.cantoII-gallery.active,
+.cantoIII-gallery.active,
+.cantoIV-gallery.active,
+.cantoV-gallery.active,
+.cantoVI-gallery.active,
+.cantoVII-gallery.active,
+.cantoVIII-gallery.active {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 900px;
+    min-width: 300px;
+    width: 100%;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.img-modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    padding-top: 20px;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+
+}
+.img-modal-content {
+    margin: auto;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    border-radius: 12px;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: auto;
+}
+.img-modal-prev, .img-modal-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -20px;
+    color: white;
+    opacity: 0.2;
+    font-weight: bold;
+    font-size: 40px;
+    transition: 0.3s ease;
+    user-select: none;
+    z-index: 101;
+}
+.img-modal-next {
+    right: 20px;
+}
+.img-modal-prev {
+    left: 20px;
+}
+.img-modal-prev:hover, .img-modal-next:hover {
+    background: rgba(0,0,0,0.8);
+    border-radius: 3px;
+}
+@keyframes zoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+.img-modal-close {
+    position: absolute;
+    top: 30px;
+    right: 45px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    z-index: 101;
+    cursor: pointer;
+}
+.grid-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 2px solid darkred;
+}
+.grid-img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
 /* end of cantos page */
 
 
