@@ -1,20 +1,23 @@
 .gallery-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(3, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(2, 1fr));
     grid-template-areas: 
         "header1 header2"
         "nav    sidebar1"
         "main   sidebar2"
     ;
 }
+.gallery-nav { 
+    grid-area: nav;
+}
 
 .gallery-grid { 
-    grid-area: header1;
+    grid-area: main;
 }
 .photo-card { 
-    grid-area: header2;
+    grid-area: sidebar2;
  }
 .featured {
-    grid-area: main;
+    grid-area: nav;
 }
