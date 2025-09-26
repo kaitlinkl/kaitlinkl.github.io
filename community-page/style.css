@@ -334,25 +334,12 @@ html {
 * {
     box-sizing: border-box;
 }
-.cantoI-gallery,
-.cantoII-gallery,
-.cantoIII-gallery,
-.cantoIV-gallery,
-.cantoV-gallery,
-.cantoVI-gallery,
-.cantoVII-gallery,
-.cantoVIII-gallery {
+.canto-gallery {
     display: none;
     background: transparent;
+    transition: opacity 0.5s ease-in-out;
 }
-.cantoI-gallery.active,
-.cantoII-gallery.active,
-.cantoIII-gallery.active,
-.cantoIV-gallery.active,
-.cantoV-gallery.active,
-.cantoVI-gallery.active,
-.cantoVII-gallery.active,
-.cantoVIII-gallery.active {
+.canto-gallery.active {
     margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -362,6 +349,7 @@ html {
     gap: 8px;
     margin-left: auto;
     margin-right: auto;
+    transition: opacity 0.5s ease-in-out;
 }
 .img-modal {
     display: none;
@@ -432,6 +420,8 @@ html {
     height: auto;
     object-fit: cover;
     border: 2px solid darkred;
+    border-radius: 8px;
+    transition: opacity 0.5s ease-in-out;
 }
 .grid-img:hover {
     transform: scale(1.05);
