@@ -398,7 +398,6 @@ html {
 }
 .img-modal-prev:hover, .img-modal-next:hover {
     background: rgba(0,0,0,0.8);
-    border-radius: 3px;
 }
 @keyframes zoom {
     from {transform: scale(0)} 
