@@ -239,6 +239,15 @@ html {
     justify-content: center;
     align-items: center;
 }
+.sinner-images img {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.sinner-images img.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 .sinner-name {
     font-size: 48px;
     font-weight: bold;

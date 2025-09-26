@@ -26,6 +26,15 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
+// portfolio image grid animation
+window.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.sinner-images img').forEach((img, i) => {
+        setTimeout(() => {
+            img.classList.add('visible');
+        }, 150 + i * 120); // stagger the animation for a nice effect
+    });
+});
+
 // cantos page stuff 
 let modalImages = {};
 let currentModalIndex = 0;
