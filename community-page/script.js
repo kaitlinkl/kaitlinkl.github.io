@@ -35,6 +35,15 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Save language choice
+function setLanguage(lang) {
+    localStorage.setItem('userLanguage', lang);
+    // Update page content based on language
+}
+
+// Load on page visit
+const userLang = localStorage.getItem('userLanguage') || 'en';
+
 // cantos page stuff 
 let modalImages = {};
 let currentModalIndex = 0;
