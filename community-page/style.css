@@ -176,13 +176,14 @@ html {
     justify-content: flex-start;
     gap: 32px; 
     margin-bottom: 48px;
+    text-align: left;
 }
 .row-right {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 32px;
-    margin-bottom: 48px;
+    margin-bottom: 80px;
     width: 100%;
     max-width: 100%;
     margin-right: 0;
@@ -224,6 +225,8 @@ html {
     font-weight: 200;
     font-style: normal;
     padding: 24px;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
 }
 .sinner-name {
@@ -252,6 +255,35 @@ html {
     font-size: 48px;
     font-weight: bold;
     margin-bottom: 16px;
+}
+@media (max-width: 700px) {
+    .row, 
+    .row-right {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .row-right .sinner-images {
+        order: 1;
+        justify-content: center;
+        margin-top: 16px;
+    }
+    .row-right .sinner-info {
+        order: 2;
+        align-items: center;
+        text-align: center;
+        margin-top: -80px;
+
+    }
+    .sinner-info {
+        order: 2;
+        align-items: center;
+        text-align: center;
+    }
+    .sinner-images {
+        order: 1;
+        margin-top: 16px;
+    }
 }
 
 
