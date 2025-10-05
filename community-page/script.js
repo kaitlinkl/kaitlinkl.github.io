@@ -26,14 +26,7 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-// portfolio image grid animation
-window.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.sinner-images img').forEach((img, i) => {
-        setTimeout(() => {
-            img.classList.add('visible');
-        }, 150 + i * 120); // stagger the animation for a nice effect
-    });
-});
+
 
 // Save language choice
 function setLanguage(lang) {
@@ -45,9 +38,10 @@ function setLanguage(lang) {
 const userLang = localStorage.getItem('userLanguage') || 'en';
 
 // cantos page stuff 
-let modalImages = {};
+let modalImages = [];
 let currentModalIndex = 0;
 let slideindex = 1;
+let showingFavorites = false;
 showSlides(slideindex);
 
 function plusSlides(n) {
@@ -57,57 +51,162 @@ function plusSlides(n) {
 function currentSlide(n) {
   showSlides(slideindex = n);
 }
+function filterGallery() {
+  // Find the currently active canto gallery
+  const activeGallery = document.querySelector(
+    '.cantoI-gallery.active, .cantoII-gallery.active, .cantoIII-gallery.active, .cantoIV-gallery.active, .cantoV-gallery.active, .cantoVI-gallery.active, .cantoVII-gallery.active, .cantoVIII-gallery.active'
+  );
+  if (!activeGallery) return;
 
-// Enlarge image on click
+  const favs = getFavorites();
+  activeGallery.querySelectorAll('.grid-img').forEach(img => {
+    if (showingFavorites) {
+      img.parentElement.style.display = favs.includes(img.src) ? "" : "none";
+    } else {
+      img.parentElement.style.display = "";
+    }
+  });
+}
+function getFavorites() {
+    const favs = localStorage.getItem('favoriteImages');
+    return favs ? JSON.parse(favs) : [];
+}
 
-document.querySelectorAll('.grid-img').forEach(img => {
-  img.addEventListener('click', function() {
-    // Find the parent gallery of the clicked image
-    const activeGallery = this.closest('.cantoI-gallery.active, .cantoII-gallery.active, .cantoIII-gallery.active, .cantoIV-gallery.active, .cantoV-gallery.active, .cantoVI-gallery.active, .cantoVII-gallery.active, .cantoVIII-gallery.active');
-    if (!activeGallery) return;
+function setFavorites(favs) {
+    localStorage.setItem('favoriteImages', JSON.stringify(favs));
+}
 
-    // Get all images in the active gallery
-    modalImages = Array.from(activeGallery.querySelectorAll('.grid-img'));
-    currentModalIndex = modalImages.indexOf(this);
+window.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.canto-gallery .grid-img').forEach(img => {
+        // Only wrap if not already wrapped
+        if (img.parentElement.classList.contains('gallery-item')) return;
 
-    showModalImage(currentModalIndex);
-    document.getElementById('img-modal').style.display = 'flex';
+        // Create wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gallery-item';
+        wrapper.style.position = 'relative';
+        wrapper.style.display = 'block';
+
+        img.parentNode.insertBefore(wrapper, img);
+        wrapper.appendChild(img);
+
+        // Create favorite button
+        const btn = document.createElement('button');
+        btn.className = 'favorite-btn';
+        btn.title = 'Favorite';
+        btn.innerHTML = '♥';
+
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const imgSrc = img.src;
+            let favs = getFavorites();
+            if (favs.includes(imgSrc)) {
+                favs = favs.filter(f => f !== imgSrc);
+                btn.classList.remove('favorited');
+            } else {
+                favs.push(imgSrc);
+                btn.classList.add('favorited');
+            }
+            setFavorites(favs);
+            filterGallery(); // update view immediately
+        });
+
+        // Set initial state
+        const favs = getFavorites();
+        if (favs.includes(img.src)) {
+            btn.classList.add('favorited');
+        }
+
+        wrapper.appendChild(btn);
+
+        // Attach modal/enlarge click handler HERE, after wrapping
+        img.addEventListener('click', function() {
+            const activeGallery = img.closest('.cantoI-gallery.active, .cantoII-gallery.active, .cantoIII-gallery.active, .cantoIV-gallery.active, .cantoV-gallery.active, .cantoVI-gallery.active, .cantoVII-gallery.active, .cantoVIII-gallery.active');
+            if (!activeGallery) return;
+
+            const allImages = Array.from(activeGallery.querySelectorAll('.grid-img'));
+            const favs = getFavorites();
+
+            if (typeof showingFavorites !== "undefined" && showingFavorites) {
+                modalImages = allImages.filter(i => favs.includes(i.src));
+                if (!favs.includes(img.src)) return;
+                currentModalIndex = modalImages.indexOf(img);
+            } else {
+                modalImages = allImages;
+                currentModalIndex = modalImages.indexOf(img);
+            }
+
+            showModalImage(currentModalIndex);
+            document.getElementById('img-modal').style.display = 'flex';
+        });
+    });
+});
+function showModalImage(index) {
+  if (!modalImages.length) return;
+  document.getElementById('img-modal-img').src = modalImages[index].src;
+}
+// Close modal when clicking the close button or outside the image
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('img-modal');
+  if (!modal) return;
+  modal.querySelector('.img-modal-close').onclick = function() {
+    modal.style.display = 'none';
+  };
+  modal.onclick = function(e) {
+    if (e.target === modal) modal.style.display = 'none';
+  };
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleBtn = document.getElementById('toggle-favorites-btn');
+  if (!toggleBtn) return;
+  toggleBtn.addEventListener('click', function() {
+    showingFavorites = !showingFavorites;
+    toggleBtn.textContent = showingFavorites ? "Show All Images" : "Show Favorites Only";
+    filterGallery();
+
+    // --- Update modalImages if modal is open ---
+    const modal = document.getElementById('img-modal');
+    if (modal && modal.style.display === 'flex') {
+      // Find the active gallery and all images
+      const activeGallery = document.querySelector(
+        '.cantoI-gallery.active, .cantoII-gallery.active, .cantoIII-gallery.active, .cantoIV-gallery.active, .cantoV-gallery.active, .cantoVI-gallery.active, .cantoVII-gallery.active, .cantoVIII-gallery.active'
+      );
+      if (activeGallery) {
+        const allImages = Array.from(activeGallery.querySelectorAll('.grid-img'));
+        const favs = getFavorites();
+        if (showingFavorites) {
+          modalImages = allImages.filter(i => favs.includes(i.src));
+        } else {
+          modalImages = allImages;
+        }
+        // If the current image is not in the new modalImages, close modal
+        const currentImgSrc = document.getElementById('img-modal-img').src;
+        const newIndex = modalImages.findIndex(i => i.src === currentImgSrc);
+        if (newIndex === -1) {
+          modal.style.display = 'none';
+        } else {
+          currentModalIndex = newIndex;
+          showModalImage(currentModalIndex);
+        }
+      }
+    }
   });
 });
 
-function showModalImage(index) {
-  const modalImg = document.getElementById('img-modal-img');
-  modalImg.src = modalImages[index].src;
-}
-
-// Close modal when clicking the close button or outside the image
-document.querySelector('.img-modal-close').onclick = function() {
-  document.getElementById('img-modal').style.display = 'none';
-};
-document.getElementById('img-modal').onclick = function(e) {
-  if (e.target === this) this.style.display = 'none';
-};
-function showModalImage(index) {
-  const modalImg = document.getElementById('img-modal-img');
-  modalImg.src = modalImages[index].src;
-}
-// Previous/Next buttons
-document.querySelector('.img-modal-next').onclick = function(e) {
-  e.stopPropagation();
-  if (modalImages.length === 0) return;
+function nextModalImage() {
+  if (!modalImages.length) return;
   currentModalIndex = (currentModalIndex + 1) % modalImages.length;
   showModalImage(currentModalIndex);
-};
-
-document.querySelector('.img-modal-prev').onclick = function(e) {
-  e.stopPropagation();
-  if (modalImages.length === 0) return;
+}
+function prevModalImage() {
+  if (!modalImages.length) return;
   currentModalIndex = (currentModalIndex - 1 + modalImages.length) % modalImages.length;
   showModalImage(currentModalIndex);
-};
+}
 
-// Show slides and corresponding galleries
-
+// Also call filterGallery when the slide changes
+// For example, in your showSlides() function, add:
 function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("canto-slides");
@@ -127,13 +226,6 @@ function showSlides(n) {
   let galleries = document.querySelectorAll('.cantoI-gallery, .cantoII-gallery, .cantoIII-gallery, .cantoIV-gallery, .cantoV-gallery, .cantoVI-gallery, .cantoVII-gallery, .cantoVIII-gallery');
   galleries.forEach(gallery => gallery.classList.remove('active'));
 
-  function showGalleryForSlide(slideIndex) {
-  document.querySelectorAll('.canto-gallery').forEach(gallery => {
-    gallery.classList.remove('active');
-  });
-  const galleryToShow = document.querySelector(`.canto${slideIndex}-gallery`);
-  if (galleryToShow) galleryToShow.classList.add('active');
-}
   // Show the gallery for the current slide
   if (slideindex === 1) {
     document.querySelector('.cantoI-gallery').classList.add('active');
@@ -152,5 +244,8 @@ function showSlides(n) {
   } else if (slideindex === 8) {
     document.querySelector('.cantoVIII-gallery').classList.add('active');
   }
+  filterGallery();
 }
+
+
 // end of cantos page stuff
