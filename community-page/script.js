@@ -26,7 +26,12 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-
+// Add this to your script.js
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.sinner-images img').forEach(img => {
+    img.classList.add('visible');
+  });
+});
 
 // Save language choice
 function setLanguage(lang) {
