@@ -67,13 +67,14 @@ html {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
   }
   
-  .twitter {
-    background-color: #1da1f2;
+  .favorite {
+    background-color: #d54040;
     text-decoration: none;
+    margin-bottom: 15px;
   }
-  
-  .twitter:hover {
-    background-color: #1e7fbb;
+
+  .favorite:hover {
+    background-color: #e86978;
   }
   
   .new-quote {
@@ -91,6 +92,14 @@ html {
     cursor: not-allowed;
   }
 
+  .show-favorites {
+    background-color: #9b54e8;
+  }
+
+    .show-favorites:hover {
+        background-color: #b580ed;
+    }
+
   #js-quote-text {
     width: 300px;
     height: 300px;
@@ -104,6 +113,38 @@ html {
     object-fit: cover;
     display: block;
     margin-bottom: 0;
+}
+#favorites-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#favorites-container img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  }
+
+  #image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  #image-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
   }
 
   @media screen and (max-width: 600px) {
