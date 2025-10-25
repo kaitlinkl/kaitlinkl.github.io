@@ -16,14 +16,33 @@ html {
   }
   
   .app {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
     width: 600px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    margin: 0 auto;
+    margin-top: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif
+  }
+
+  .paragraph {
+    position: relative;
+    width: 600px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    padding: 20px;
+    font-size: 18px;
+    color: black;
+    margin-top: 20px;   
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   header {
