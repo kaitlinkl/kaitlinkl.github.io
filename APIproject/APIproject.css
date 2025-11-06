@@ -1,8 +1,10 @@
 .title-header {
     text-align: center;
-    font-size: 50px;
+    font-size: 80px;
     margin-top: 50px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    font-family: "cofo-glassier", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 form {
@@ -25,7 +27,7 @@ form {
 }
 
 form button {
-    background-color: #218838;    
+    background-color: #8e7dbe;    
     color: white;
     border: 0;
     outline: 0;
@@ -36,7 +38,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #1e7e34;
+    background-color: #7b6aac;
 }
 
 #show-more-button {
@@ -44,11 +46,15 @@ form button:hover {
     margin: 20px auto;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007BFF;
+    background-color: #8e7dbe;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#show-more-button:hover {
+    background-color: #7b6aac;
 }
 
 #search-results {
