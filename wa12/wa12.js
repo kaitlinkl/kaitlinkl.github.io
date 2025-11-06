@@ -8,31 +8,67 @@ const showMoreButton = document.getElementById('show-more-button');
 let keyword = '';
 let page = 1;
 
+// ...existing code...
 async function searchImages() {
     if (page === 1) {
         searchResults.innerHTML = '';
     }
     keyword = searchBox.value.trim();
     if (!keyword) return; 
-    const url = `https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${accessKey}&per-page=12`;
+    const url = `https://api.unsplash.com/search/photos?page=${page}&query=${encodeURIComponent(keyword)}&client_id=${accessKey}&per_page=12`;
 
     const response = await fetch(url);
     const data = await response.json();
     
-    const results = data.results;
+    const results = data.results || [];
 
-    results.map ((result) => {
+    // create thumbnails that open overlay on click
+    results.forEach((result) => {
         const image = document.createElement("img");
         image.src = result.urls.small;
-        const imageLink = document.createElement("a");
-        imageLink.href = result.links.html;
-        imageLink.target = "_blank";
+        image.alt = result.alt_description || '';
+        image.className = 'result-thumb';
+        // click to open larger image in overlay
+        image.addEventListener('click', () => {
+            openOverlay(result.urls.regular || result.urls.full || result.urls.small);
+        });
 
-        imageLink.appendChild(image);
-        searchResults.appendChild(imageLink);
-    })
+        searchResults.appendChild(image);
+    });
+
     showMoreButton.style.display = 'block';
 }
+
+// overlay helpers
+function openOverlay(src) {
+    const overlay = document.getElementById('image-overlay');
+    const enlarged = document.getElementById('enlarged-image');
+    if (!overlay || !enlarged) return;
+    enlarged.src = src;
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay() {
+    const overlay = document.getElementById('image-overlay');
+    if (!overlay) return;
+    overlay.style.display = 'none';
+    document.getElementById('enlarged-image').src = '';
+    document.body.style.overflow = '';
+}
+
+// attach overlay close handlers (safe even if elements exist later)
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('image-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (e.target.id === 'image-overlay' || e.target.id === 'close-overlay') {
+                closeOverlay();
+            }
+        });
+    }
+});
+// ...existing code...
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();

@@ -5,7 +5,7 @@
     <meta name="Image Searcher" content="A simple image search application using an external API.">
     <title>Image Searcher</title>
     <link rel="stylesheet" href="https://use.typekit.net/ots7evz.css">
-    <link rel="stylesheet" href="APIproject.css">
+    <link rel="stylesheet" href="wa12.css">
 </head>
 <body>
     <h1 class="title-header">Image Searcher</h1>
@@ -16,6 +16,10 @@
     </form>
     <div id="search-results"></div>
     <button id="show-more-button">Show More</button>
-    <script src="APIproject.js"></script>
+    <div id="image-overlay" style="display:none;">
+        <button id="close-overlay" aria-label="Close" title="Close">&times;</button>
+        <img id="enlarged-image" src="" alt="Enlarged result">
+    </div>
+    <script src="wa12.js"></script>
 </body>
 </html>
