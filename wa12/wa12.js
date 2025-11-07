@@ -8,7 +8,7 @@ const showMoreButton = document.getElementById('show-more-button');
 let keyword = '';
 let page = 1;
 
-// ...existing code...
+
 async function searchImages() {
     if (page === 1) {
         searchResults.innerHTML = '';
@@ -22,13 +22,12 @@ async function searchImages() {
     
     const results = data.results || [];
 
-    // create thumbnails that open overlay on click
+
     results.forEach((result) => {
         const image = document.createElement("img");
         image.src = result.urls.small;
         image.alt = result.alt_description || '';
         image.className = 'result-thumb';
-        // click to open larger image in overlay
         image.addEventListener('click', () => {
             openOverlay(result.urls.regular || result.urls.full || result.urls.small);
         });
@@ -39,7 +38,7 @@ async function searchImages() {
     showMoreButton.style.display = 'block';
 }
 
-// overlay helpers
+
 function openOverlay(src) {
     const overlay = document.getElementById('image-overlay');
     const enlarged = document.getElementById('enlarged-image');
@@ -57,7 +56,7 @@ function closeOverlay() {
     document.body.style.overflow = '';
 }
 
-// attach overlay close handlers (safe even if elements exist later)
+
 document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('image-overlay');
     if (overlay) {
@@ -68,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-// ...existing code...
+
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
