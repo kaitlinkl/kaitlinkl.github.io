@@ -157,7 +157,7 @@ body {
   align-items: center;
   padding: 20px;
   text-align: center;
-  color: #e0e0e0;
+  color: red;
   opacity: 0;
   transition: opacity 1.5s ease-in;
 }
